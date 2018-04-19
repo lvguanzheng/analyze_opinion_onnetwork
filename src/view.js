@@ -1,6 +1,6 @@
 import { requireAll } from 'common/util'
 import { Switch, Route, Redirect, NavLink } from 'react-router-dom'
-import SideMenu from 'component/common/SideMenu'
+import SideMenu from 'components/common/SideMenu'
 import './styles/global/layout.styl'
 
 const icons = requireAll(require.context('./images/menu-icon', false, /\.png$/))
@@ -16,22 +16,6 @@ const roots = [
                 meta: {
                     group: '消息设置',
                     icon: 'message_list'
-                }
-            }, {
-                path: '/create',
-                label: '新建消息',
-                component: 'message.Editor',
-                meta: {
-                    group: '消息设置',
-                    icon: 'new_message'
-                }
-            }, {
-                path: '/editor/:id',
-                label: '编辑消息',
-                component: 'message.Editor',
-                meta: {
-                    group: '消息设置',
-                    icon: 'new_message'
                 }
             }, {
                 path: '/category',

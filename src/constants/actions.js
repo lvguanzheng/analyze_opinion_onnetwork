@@ -3,12 +3,7 @@ export const APP = {
 }
 
 export const MESSAGE = {
-    DO_SOMETHING: 'path/to/some',
-    GET_MESSAGES: 'message/getMessages',
-    GET_MAIN_TYPES: 'message/listAllMainMessageType',
-    GET_DETAIL_TYPES: 'message/listAllDetails',
-    TO_UPDATE_MESSAGE: 'message/toUpdateMessage',
-    CLEAR_EDITOR: 'message/CLEAR_EDITOR'
+    DO_SOMETHING: 'path/to/some'
 }
 
 const actions = { APP, MESSAGE }

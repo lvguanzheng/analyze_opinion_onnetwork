@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 import { post } from 'common/api'
 
-import { APP } from 'constant/actions'
+import { APP } from 'constants/actions'
 
 function* base(action, { type, callback = _.noop, ...params }) {
     try {
