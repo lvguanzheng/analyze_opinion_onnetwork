@@ -1,0 +1,13 @@
+.menu
+    flex 1
+    > a
+        margin-left 50px
+        text-decoration none
+        color white
+        display inline-block
+        line-height 57px
+        background linear-gradient(transparent, transparent 95%, white 95%, white) center bottom / 0 100% no-repeat
+        transition background-size .3s ease
+    :global(.active), :global(:hover)
+        font-weight bold
+        background-size 100% 100%

@@ -1,0 +1,18 @@
+{
+    "flag": 1,
+    "message": "错误信息或提示信息",
+    "data": [
+        {
+            "mainId": 1,
+            "mainName": "主类别01"
+        },
+        {
+            "mainId": 2,
+            "mainName": "主类别02"
+        },
+        {
+            "mainId": 3,
+            "mainName": "主类别03"
+        }
+    ]
+}

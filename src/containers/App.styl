@@ -1,0 +1,29 @@
+header-height = 60px
+
+.container
+    min-height 100vh
+.header
+    height header-height
+    padding 0 20px
+    color white
+    background linear-gradient(to right, rgba(0, 95, 190, 1), rgba(46, 147, 255, 1))
+    display flex
+    align-items center
+    .logo
+        line-height header-height
+        padding 0 100px
+        font-size 20px
+        background transparent url('../images/logo.png') left center no-repeat
+    .menu
+        flex 1
+        > a
+            margin-left 50px
+            text-decoration none
+            color white
+            display inline-block
+            line-height header-height - 3px
+            background linear-gradient(transparent, transparent 95%, white 95%, white) center bottom / 0 100% no-repeat
+            transition background-size .3s ease
+        :global(.active), :global(:hover)
+            font-weight bold
+            background-size 100% 100%

@@ -1,0 +1,20 @@
+@import "./common.less";
+.title {
+    composes: tac;
+}
+
+.button {
+    composes: w120 h30 l30 tac white;
+    background: #49a0a3;
+    border-color: #49a0a3;
+    border-radius: 1px;
+}
+
+.button--ml-15 {
+    composes: button;
+    composes: ml15;
+}
+
+.table-container {
+    composes: m15;
+}

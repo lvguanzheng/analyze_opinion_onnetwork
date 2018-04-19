@@ -1,0 +1,150 @@
+import { requireAll } from 'common/util'
+import { Switch, Route, Redirect, NavLink } from 'react-router-dom'
+import SideMenu from 'component/common/SideMenu'
+import './styles/global/layout.styl'
+
+const icons = requireAll(require.context('./images/menu-icon', false, /\.png$/))
+
+const roots = [
+    {
+        path: '/message',
+        label: '消息管理',
+        subs: [
+            {
+                path: '/list',
+                label: '消息列表',
+                meta: {
+                    group: '消息设置',
+                    icon: 'message_list'
+                }
+            }, {
+                path: '/create',
+                label: '新建消息',
+                component: 'message.Editor',
+                meta: {
+                    group: '消息设置',
+                    icon: 'new_message'
+                }
+            }, {
+                path: '/editor/:id',
+                label: '编辑消息',
+                component: 'message.Editor',
+                meta: {
+                    group: '消息设置',
+                    icon: 'new_message'
+                }
+            }, {
+                path: '/category',
+                label: '消息类目',
+                meta: {
+                    group: '类别管理',
+                    icon: 'message_type'
+                }
+            }
+        ]
+    }, {
+        path: '/system',
+        label: '系统管理',
+        subs: [
+            {
+                path: '/role',
+                label: '角色管理',
+                meta: {
+                    group: '权限设置',
+                    icon: 'role_list'
+                }
+            }, {
+                path: '/log',
+                label: '操作日志',
+                meta: {
+                    group: '权限设置',
+                    icon: 'op_log'
+                }
+            }
+        ]
+    }
+]
+
+// genetate routes and links
+
+const containers = requireAll(require.context('containers', true, /^(.(?!App))+\.js$/))
+
+const getComponent = ({ path, component, subs }) => {
+    let comp = null
+    if (component) {
+        if (typeof component === 'function') {
+            comp = component
+        } else if (_.get(containers, component)) {
+            comp = _.get(containers, component)
+        } else {
+            comp = containers._.Simple
+        }
+    } else {
+        const parts = path.split('/').slice(1)
+        if (subs) {
+            comp = _.get(containers, [...parts, 'Index'], containers._.WithRoutes)
+        } else {
+            const tail = parts.pop()
+            comp = _.get(containers, [...parts, _.capitalize(tail)], containers._.Simple)
+        }
+    }
+    return comp
+}
+
+const mapViewToRoutesAndLinks = view => {
+    const { subs = [], path = '' } = view
+    const Links = props => {
+        const Menu = props.template || SideMenu
+        return (
+            <Menu {...props}>
+                {
+                    subs
+                        .filter(sub => _.get(sub, 'meta.visible', true))
+                        .map(sub => ({ ...sub, path: path + sub.path }))
+                        .map(sub => {
+                            const iconKey = _.get(sub, 'meta.icon', false)
+                            return (
+                                <NavLink key={sub.path} to={sub.path} meta={sub.meta}>
+                                    {
+                                        iconKey && (
+                                            <React.Fragment>
+                                                <img className="on" src={icons[iconKey]} alt={sub.label} />
+                                                <img className="off" src={icons[`${iconKey}_off`]} alt={sub.label} />
+                                            </React.Fragment>
+                                        )
+                                    }
+                                    {sub.label}
+                                </NavLink>
+                            )
+                        })
+                }
+            </Menu>
+        )
+    }
+
+    const Routes = props => (
+        <div {...{ className: 'routes-container', ...props }}>
+            <Switch>
+                {
+                    subs
+                        .map(sub => ({ ...sub, path: path + sub.path }))
+                        .map(sub => {
+                            const Comp = getComponent(sub)
+                            return (<Route
+                                key={sub.path}
+                                path={sub.path}
+                                render={ps => <Comp {...ps} view={mapViewToRoutesAndLinks(sub)} />}
+                            />)
+                        })
+                }
+                {
+                    !!subs.length && <Redirect from={path} to={path + subs[0].path} />
+                }
+            </Switch>
+        </div>
+    )
+
+    return { Routes, Links, raw: view }
+}
+
+export default mapViewToRoutesAndLinks({ subs: roots })

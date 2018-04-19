@@ -1,0 +1,35 @@
+.menu
+    width 180px
+    box-shadow: 2px 2px 8px 0 rgba(0,0,0,0.03)
+    a
+        font-size 14px
+        color #61676E
+        display block
+        line-height 40px
+        padding-left 26px
+        border-left 4px solid white
+        img
+            height 16px
+            width 16px
+            margin-right 10px
+            vertical-align text-bottom
+        :global(img.on)
+            display none
+        :global(img.off)
+            display inline-block
+    :global(.active)
+        color rgba(85, 168, 253, 1)
+        border-color rgba(85, 168, 253, 1)
+        background rgba(85, 168, 253, 0.08)
+        :global(img.on)
+            display inline-block
+        :global(img.off)
+            display none
+    
+    .group
+        font-size 14px
+        line-height 64px
+        color #A3A8B3
+        padding-left 30px
+    a + .group
+        margin-top 15px

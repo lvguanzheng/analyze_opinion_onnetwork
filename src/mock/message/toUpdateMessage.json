@@ -1,0 +1,37 @@
+{
+    "flag": 1,
+    "message": "错误信息或提示信息",
+    "data": {
+        "showType": 1,
+        "mainTypeId": 2,
+        "detailTypeId": 2,
+        "content": "<p>编辑内容</p>",
+        "remark": "备注信息",
+        "receivers": [
+            {
+                "userName": "类型:String 说明:263账号",
+                "chineseName": "类型:String 说明:中文名"
+            },
+            {
+                "more": "..."
+            }
+        ],
+        "depts": [
+            {
+                "deptId": "类型:Number 说明:部门id",
+                "deptType": "类型:Number 说明:1事业部；2军团；3量子跃迁团；4销售部；5技能组",
+                "deptName": "类型:String 说明:部门名称"
+            },
+            {
+                "more": "..."
+            }
+        ],
+        "pushType": 2,
+        "pushTime": "10:00:00",
+        "pushStartInterval": "2018/03/01 00:00:00",
+        "pushEndInterval": "2018/10/01 23:59:59",
+        "pushRate": 2,
+        "pushRateUnit": 2,
+        "status": 1
+    }
+}
