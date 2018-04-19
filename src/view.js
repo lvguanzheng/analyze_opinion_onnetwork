@@ -8,27 +8,20 @@ const icons = requireAll(require.context('./images/menu-icon', false, /\.png$/))
 const roots = [
     {
         path: '/message',
-        label: '消息管理',
+        label: '新闻管理',
         subs: [
             {
                 path: '/list',
-                label: '消息列表',
+                label: '新闻列表',
                 meta: {
-                    group: '消息设置',
+                    group: '热点新闻',
                     icon: 'message_list'
-                }
-            }, {
-                path: '/category',
-                label: '消息类目',
-                meta: {
-                    group: '类别管理',
-                    icon: 'message_type'
                 }
             }
         ]
     }, {
         path: '/system',
-        label: '系统管理',
+        label: '新闻分析',
         subs: [
             {
                 path: '/role',
