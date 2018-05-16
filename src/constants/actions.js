@@ -3,7 +3,11 @@ export const APP = {
 }
 
 export const MESSAGE = {
-    DO_SOMETHING: 'path/to/some'
+    FETCH_HOT_MESSAGE_LIST: 'message/hotMsgList',
+    FETCH_MSG_DETAIL_DATA: 'message/msgDetail',
+    FETCH_COMMENT_USER: 'message/commentUser',
+    FETCH_COMMENT_LIST: 'message/msgCommentList',
+    FETCH_MSG_COMMENT_SENSIBILITY: 'message/msgCommentSensibility'
 }
 
 const actions = { APP, MESSAGE }

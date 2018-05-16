@@ -13,29 +13,30 @@ const roots = [
             {
                 path: '/list',
                 label: '新闻列表',
+                component: 'message.HotMessageList',
                 meta: {
                     group: '热点新闻',
                     icon: 'message_list'
+                }
+            }, {
+                path: '/messageDetail/:msgId',
+                component: 'message.MessageDetail',
+                meta: {
+                    visible: false
                 }
             }
         ]
     }, {
         path: '/system',
-        label: '新闻分析',
+        label: '统计分析',
         subs: [
             {
                 path: '/role',
-                label: '角色管理',
+                label: '数据统计',
+                component: 'message.MsgDataStatistics',
                 meta: {
-                    group: '权限设置',
+                    group: '数据分析',
                     icon: 'role_list'
-                }
-            }, {
-                path: '/log',
-                label: '操作日志',
-                meta: {
-                    group: '权限设置',
-                    icon: 'op_log'
                 }
             }
         ]
