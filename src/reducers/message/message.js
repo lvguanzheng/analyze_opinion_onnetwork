@@ -20,22 +20,33 @@ export default handleActions({
 	[MESSAGE.FETCH_COMMENT_USER.FAILED](state, action) {
 		return state
 	},
-	[MESSAGE.FETCH_COMMENT_LIST.SUCCEED](state, action) {
-		return {...state, commentListData: action.data}
-	},
-	[MESSAGE.FETCH_COMMENT_LIST.FAILED](state, action) {
-		return state
-	},
 	[MESSAGE.FETCH_MSG_COMMENT_SENSIBILITY.SUCCEED](state, action) {
 		return {...state, sensibilityData: action.data}
 	},
 	[MESSAGE.FETCH_MSG_COMMENT_SENSIBILITY.FAILED](state, action) {
 		return state
+	},
+	[MESSAGE.FETCH_MSG_TYPE.SUCCEED](state, action) {
+		return {...state, msgType: action.data}
+	},
+	[MESSAGE.FETCH_MSG_TYPE.FAILED](state, action) {
+		return state
+	},
+	[MESSAGE.FETCH_HOT_TOPIC.SUCCEED](state, action) {
+		return {...state, topicData: action.data}
+	},
+	[MESSAGE.FETCH_HOT_TOPIC.FAILED](state, action) {
+		return state
+	},
+	[MESSAGE.FETCH_VIEW_POINT.SUCCEED](state, action) {
+		return {...state, viewPointData: action.data}
 	}
 },{
 	hotMsg: {},
 	msgDetailData: {},
 	commentUserData: {},
-	commentListData: {},
-	sensibilityData: {}
+	sensibilityData: {},
+	msgType: {},
+	topicData: {},
+	viewPointData: {}
 })

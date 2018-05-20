@@ -1,0 +1,28 @@
+{
+    "flag": 1,
+    "message": "ok",
+    "data": {
+        "types": [{
+            "name": "娱乐",
+            "value": 10
+        },{
+            "name": "财经",
+            "value": 20
+        },{
+            "name": "体育",
+            "value": 15
+        },{
+            "name": "民生",
+            "value": 24
+        },{
+            "name": "国际",
+            "value": 16
+        },{
+            "name": "政法",
+            "value": 31
+        },{
+            "name": "科技",
+            "value": 25
+        }]
+    }
+}

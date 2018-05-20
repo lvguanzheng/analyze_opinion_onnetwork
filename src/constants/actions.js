@@ -3,11 +3,14 @@ export const APP = {
 }
 
 export const MESSAGE = {
+    REGET_HOT_TOPIC_DATA: 'message/reget',
     FETCH_HOT_MESSAGE_LIST: 'message/hotMsgList',
     FETCH_MSG_DETAIL_DATA: 'message/msgDetail',
     FETCH_COMMENT_USER: 'message/commentUser',
-    FETCH_COMMENT_LIST: 'message/msgCommentList',
-    FETCH_MSG_COMMENT_SENSIBILITY: 'message/msgCommentSensibility'
+    FETCH_MSG_COMMENT_SENSIBILITY: 'message/msgCommentSensibility',
+    FETCH_MSG_TYPE: 'message/msgTypeStatistics',
+    FETCH_HOT_TOPIC: 'message/getHotTopic',
+    FETCH_VIEW_POINT: 'message/viewPointStatistics'
 }
 
 const actions = { APP, MESSAGE }

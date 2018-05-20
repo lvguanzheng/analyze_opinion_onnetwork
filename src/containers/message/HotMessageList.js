@@ -12,7 +12,7 @@ const columns = [{
     dataIndex: '',
 	render: (val, record, index) => <span>{index}</span>
 },{
-	title: '热搜新闻',
+	title: '热搜话题',
 	dataIndex: 'msgDesc',
 	key: 'msgDesc',
 	render: (val, record, index) => (

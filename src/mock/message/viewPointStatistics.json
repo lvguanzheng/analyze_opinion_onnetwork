@@ -1,0 +1,35 @@
+{
+    "flag": 1,
+    "message": "ok",
+    "data": {
+        "viewPoint": [{
+            "viewContent": "马克思主义是社会主义的指导思想",
+            "rate": 0.14,
+            "emotionType": "good"
+        },{
+            "viewContent": "呵呵，指导思想，狗屁",
+            "rate": 0.2,
+            "emotionType": "bad"
+        },{
+            "viewContent": "马克思是一个伟大的思想家",
+            "rate": 0.1,
+            "emotionType": "good"
+        },{
+            "viewContent": "坑害了中国",
+            "rate": 0.25,
+            "emotionType": "bad"
+        },{
+            "viewContent": "我来围观一波",
+            "rate": 0.11,
+            "emotionType": "good"
+        },{
+            "viewContent": "马克思主义还是在初中的时候学习政治历史的时候接触过的呢。。。",
+            "rate": 0.08,
+            "emotionType": "good"
+        },{
+            "viewContent": "200周年，哇！",
+            "rate": 0.12,
+            "emotionType": "good"
+        }]
+    }
+}

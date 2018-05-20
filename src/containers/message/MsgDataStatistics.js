@@ -8,20 +8,31 @@ import 'echarts/lib/component/title'
 import 'echarts/lib/component/legendScroll'
 
 import styles from './Index.styl'
+import { MESSAGE } from '../../constants/actions'
 
 class MsgDataStatistics extends React.Component {
 	constructor(props) {
 		super(props)
 	}
 	componentDidMount() {
-		this.initPie()
-		this.initBar()
+		this.getChartData()
+		this.getHotTopic()
 	}
-	initPie = () => {
+	initPie = data => {
+		const { types = [] } = data
+		let typeName = []
+		let typeObjArr = []
+		types.map(type => {
+			typeName.push(type.name)
+			let typeObj = {}
+			typeObj.name = type.name
+			typeObj.value = type.value
+			typeObjArr.push(typeObj)
+		})
 		const pieChart = echarts.init(document.getElementById('pie'))
 		const pieOption = {
 		    title : {
-		        text: '热点话题分类统计图',
+		        text: '热点话题分类比例统计图',
 		        x:'center'
 		    },
 		    tooltip : {
@@ -31,7 +42,7 @@ class MsgDataStatistics extends React.Component {
 		    legend: {
 		        x : 'center',
 		        y : 'bottom',
-		        data:['rose1','rose2','rose3','rose4','rose5','rose6','rose7','rose8']
+		        data:typeName
 		    },
 		    toolbox: {
 		        show : true,
@@ -49,56 +60,72 @@ class MsgDataStatistics extends React.Component {
 		    calculable : true,
 		    series : [
 		        {
-		            name:'面积模式',
+		            name:'比例',
 		            type:'pie',
 		            radius : [30, 110],
 		            center : ['50%', '50%'],
 		            roseType : 'area',
-		            data:[
-		                {value:10, name:'rose1'},
-		                {value:5, name:'rose2'},
-		                {value:15, name:'rose3'},
-		                {value:25, name:'rose4'},
-		                {value:20, name:'rose5'},
-		                {value:35, name:'rose6'},
-		                {value:30, name:'rose7'},
-		                {value:40, name:'rose8'}
-		            ]
+		            data: typeObjArr
 		        }
 		    ]
 		}
 		pieChart.setOption(pieOption)
 	}
-	initBar = () => {
+	initBar = data => {
+		const { types = [] } = data
+		let typeName = []
+		let typeValue = []
+		types.map(type => {
+			typeName.push(type.name)
+			typeValue.push(type.value)
+		})
 		const barChart = echarts.init(document.getElementById('bar'))
 		const barOption = {
             title: {
-                text: '热点话题数量统计图',
+                text: '热点话题分类数量统计图',
                 x: 'center'
             },
             tooltip: {},
             legend: {
-                data:['销量'],
+                data:['种类'],
                 x: 'center',
                 y: 'bottom'
             },
             xAxis: {
-                data: ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]
+                data: typeName
             },
             yAxis: {},
             series: [{
-                name: '销量',
+                name: '种类',
                 type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
+                data: typeValue
             }]
         }
         barChart.setOption(barOption)
 	}
+	getChartData = () => {
+		const { dispatch } = this.props
+		dispatch({type: MESSAGE.FETCH_MSG_TYPE, callback: data => {
+			this.initPie(data)
+		    this.initBar(data)
+		}})
+	}
+	getHotTopic =() => {
+		const { dispatch } = this.props
+		dispatch({type: MESSAGE.FETCH_HOT_TOPIC})
+	}
 	render() {
+		const { topicData: { topic } } = this.props
 		return(
-			<div className={styles['chart-block']}>
-			    <div id="pie" className={styles['pie-chart-block']}></div>
-			    <div id="bar" className={styles['bar-chart-block']}></div>
+			<div>
+				<div className={styles['chart-block']}>
+				    <div id="pie" className={styles['pie-chart-block']}></div>
+				    <div id="bar" className={styles['bar-chart-block']}></div>
+				</div>
+				<div className={styles['top-topic-block']}>
+				    <div className={styles['msg-title-block']}>Top Topic</div>
+				    <div style={{fontWeight: "bold"}}>当前最受网民关注的话题类型<span className={styles['topic-text']}>{topic}</span></div>
+				</div>
 			</div>
 		)
 	}
