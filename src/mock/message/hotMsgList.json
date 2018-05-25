@@ -7,34 +7,42 @@
         "pageCount": 6,
         "maxRecord": 51,
     	"records": [{
+            "id": 1,
             "msgId": 1,
             "msgDesc": "纪念马克思诞辰200周年",
             "isHaveData": true
         },{
+            "id": 2,
             "msgId": 2,
             "msgDesc": "纪念马克思诞辰200周年",
             "isHaveData": true
         },{
+            "id": 3,
             "msgId": 3,
             "msgDesc": "纪念马克思诞辰200周年",
             "isHaveData": true
         },{
+            "id": 4,
             "msgId": 4,
             "msgDesc": "纪念马克思诞辰200周年",
             "isHaveData": true
         },{
+            "id": 5,
             "msgId": 5,
             "msgDesc": "纪念马克思诞辰200周年",
             "isHaveData": true
         },{
+            "id": 6,
             "msgId": 6,
             "msgDesc": "纪念马克思诞辰200周年",
             "isHaveData": false
         },{
+            "id": 7,
             "msgId": 7,
             "msgDesc": "纪念马克思诞辰200周年",
             "isHaveData": true
         },{
+            "id": 8,
             "msgId": 8,
             "msgDesc": "纪念马克思诞辰200周年",
             "isHaveData": true

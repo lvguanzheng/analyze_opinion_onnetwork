@@ -1,29 +1,56 @@
-const defaults = {
-    credentials: 'same-origin',
-    headers: {
-        'X-Requested-With': 'XMLHttpRequest'
-    }
+import { message as msg } from 'antd'
+
+const isDev = process.env.NODE_ENV !== 'production'
+const defaultHeaders = {
+    'X-Requested-With': 'XMLHttpRequest',
+    'Content-Type': 'application/x-www-form-urlencoded'
 }
 
-const request = (url, params, method = 'POST') => {
+let redirected = false
+
+const request = (url, params, headers = {}, method = 'POST') => {
+    const pairs = Object.entries(params).filter(([ k, v ]) => v !== null && v !== undefined) // 去除值为 null、undefined 的入参
+    let body = pairs.length ? pairs.reduce((formdata, [ k, v ]) => (formdata.append(k, v), formdata), new URLSearchParams()) : null
+
+    if (headers['Content-Type'] === 'application/json') {
+        body = JSON.stringify(params)
+    }
+
     const opts = {
-        ...defaults,
         method,
-        body: params ? Object.entries(params).reduce((formdata, [k, v]) => (formdata.append(k, v), formdata), new FormData()) : null
+        body,
+        credentials: 'same-origin',
+        headers: {
+            ...defaultHeaders,
+            ...headers
+        }
     }
 
     return fetch(url, opts)
-        .then(resp => resp.json())
-        .then(({ flag, data, message }) => {
-            if (flag === -1) {
-                console.debug('GO TO LOGIN')
-            } else if (flag !== 1) {
-                throw message
+        .then(resp => resp.text().then(text => [ text, resp.status ]))
+        .then(([ text, status ]) => {
+            try {
+                return JSON.parse(text.replace(/,[^{,]+:null|[^{,]+:null,/g, ''))
+            } catch (e) {
+                throw status
             }
-            return data
-        }).catch(err => {
-            alert(`Error: ${err.message || err}`)
-            throw err
+        })
+        .then(({ flag, data, message }) => {
+            if (flag !== 1) {
+                throw message
+            } else {
+                return data
+            }
+        })
+        .catch(err => {
+            if ((err === 401 || err === 'LOGOVERTIME') && !redirected) {
+                redirected = true
+                window.location.href = isDev ? '/dev_login' : `api/cms/tologin?originPage=${window.encodeURI(window.location.href)}`
+            } else {
+                msg.error(`${err.message || err}`)
+                console.error(`👉${err.message || err}👈`)
+                throw err // !!!抛出异常，使 saga fail
+            }
         })
 }
 

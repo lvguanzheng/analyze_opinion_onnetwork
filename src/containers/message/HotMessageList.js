@@ -6,22 +6,6 @@ import { MESSAGE } from '../../constants/actions'
 import styles from './Index.styl'
 import NO_DATA from '../../images/no_data.png'
 
-const columns = [{
-	title: '序号',
-	key: '',
-    dataIndex: '',
-	render: (val, record, index) => <span>{index}</span>
-},{
-	title: '热搜话题',
-	dataIndex: 'msgDesc',
-	key: 'msgDesc',
-	render: (val, record, index) => (
-		<div>
-		<span>{record.msgDesc}</span>
-		{!record.isHaveData && <img className={styles['no-data-img']} src={NO_DATA}/>}
-		</div>
-	)
-}]
 class HotMessageList extends React.Component {
 	constructor(props) {
 		super(props)
@@ -34,7 +18,7 @@ class HotMessageList extends React.Component {
 		console.log("重新获取数据")
 	}
 	handelClick = record => {
-		const { msgId } = record
+		const { id } = record
 		const { history } = this.props
 		if(!record.isHaveData) {
 			Modal.warning({
@@ -43,14 +27,14 @@ class HotMessageList extends React.Component {
 				okText: '知道了'
 			})
 		} else {
-			history.push('/message/messageDetail/'+msgId)
+			history.push('/message/messageDetail/'+id)
 		}
 	}
 	search = () => {
         const { dispatch } = this.props
         const queryParams = {}
         queryParams.pageNumber = 1
-        queryParams.pageSize = 10
+        queryParams.pageSize = 5
         this.queryParams = queryParams
         dispatch({
             type: MESSAGE.FETCH_HOT_MESSAGE_LIST,
@@ -65,7 +49,22 @@ class HotMessageList extends React.Component {
     }
 	render() {
 		const { hotMsg: { records, pageNumber, maxRecord, pageSize} } = this.props
-		console.log(this.props)
+		const columns = [{
+			title: '序号',
+			key: '',
+		    dataIndex: '',
+			render: (val, record, index) => <span>{pageSize*(pageNumber-1)+index+1}</span>
+		},{
+			title: '热搜话题',
+			dataIndex: 'msgDesc',
+			key: 'msgDesc',
+			render: (val, record, index) => (
+				<div>
+				<span>{record.msgDesc}</span>
+				{!record.isHaveData && <img className={styles['no-data-img']} src={NO_DATA}/>}
+				</div>
+			)
+		}]
 		return (
 			<div>
 			    <div className={styles['title-block']}>

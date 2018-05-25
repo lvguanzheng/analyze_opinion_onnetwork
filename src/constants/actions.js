@@ -16,10 +16,10 @@ export const MESSAGE = {
 const actions = { APP, MESSAGE }
 
 const rules = [
-    [/./, path => `192.168.0.121:7388/dragnet-war/api/${path}`]
+    [/./, path => `localhost:8821/news_recommendation/${path}`]
 ]
 
-const isMock = true
+const isMock = false
 
 function mapApi(api) {
     let mapped = api

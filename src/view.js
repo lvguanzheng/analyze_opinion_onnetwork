@@ -19,7 +19,7 @@ const roots = [
                     icon: 'message_list'
                 }
             }, {
-                path: '/messageDetail/:msgId',
+                path: '/messageDetail/:id',
                 component: 'message.MessageDetail',
                 meta: {
                     visible: false
