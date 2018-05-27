@@ -110,6 +110,8 @@ class MessageDetail extends React.Component {
 	render() {
 		console.log(this.props)
 		const { msgDetailData: { content, titleType, author, authorHead, readCount, commentCount, attitudesCount, commentList = [] }, commentUserData: { commentUser = [] }, sensibilityData: { sensibility } } = this.props
+		const readStr = readCount + ''
+		const commentStr = commentCount + ''
 		return(
 			<div>
 			    <div className={styles['msg-detail-block']}>
@@ -118,7 +120,7 @@ class MessageDetail extends React.Component {
 			            <div className={styles['author-info']}>{author}</div>
 			            <div>{content}</div>
 			        </div>
-			        <span className={styles['msg-detail-info']}>阅读<span className={styles['info-text']}>({readCount})</span> | 讨论<span className={styles['info-text']}>({commentCount})</span> | 粉丝<span className={styles['info-text']}>({attitudesCount})</span></span>
+			        <span className={styles['msg-detail-info']}>阅读<span className={styles['info-text']}>({readStr.trim()})</span> | 讨论<span className={styles['info-text']}>({commentStr.trim()})</span> | 粉丝<span className={styles['info-text']}>({attitudesCount})</span></span>
 			    </div>
 			    <div className={styles['msg-influence-rank-block']}>
 			        <div className={styles['msg-title-block']}>评论用户影响力榜单</div>
