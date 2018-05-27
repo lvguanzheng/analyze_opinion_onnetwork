@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Table, Button, Pagination, Modal } from 'antd'
+import { Table, Button, Pagination, Modal, Spin } from 'antd'
 
 import { MESSAGE } from '../../constants/actions'
 import styles from './Index.styl'
@@ -9,13 +9,29 @@ import NO_DATA from '../../images/no_data.png'
 class HotMessageList extends React.Component {
 	constructor(props) {
 		super(props)
+		this.state = {
+			isLoading: false
+		}
 		this.queryParams = {}
 	}
 	componentDidMount() {
 		this.search()
 	}
 	reFetchMsgList = () => {
-		console.log("重新获取数据")
+		this.setState({
+			isLoading: true
+		}, () => {
+			const { dispatch } = this.props
+		    dispatch({type: MESSAGE.REGET_HOT_TOPIC_DATA, callback: () => {
+		    	this.search()
+		    	this.cancelLoading()
+		    } })
+		})
+	}
+	cancelLoading = () => {
+		this.setState({
+			isLoading: false
+		})
 	}
 	handelClick = record => {
 		const { id } = record
@@ -49,6 +65,7 @@ class HotMessageList extends React.Component {
     }
 	render() {
 		const { hotMsg: { records, pageNumber, maxRecord, pageSize} } = this.props
+		const { isLoading } = this.state
 		const columns = [{
 			title: '序号',
 			key: '',
@@ -66,9 +83,9 @@ class HotMessageList extends React.Component {
 			)
 		}]
 		return (
-			<div>
+			<div style={{position: "relative"}}>
 			    <div className={styles['title-block']}>
-			        <span className={styles['title-text']}>当前热搜榜</span>
+			        <span className={styles['title-text']}>当前热搜话题</span>
 			        <Button type="primary" onClick={this.reFetchMsgList}>刷新</Button>
 			    </div>
 			    <Table
@@ -91,6 +108,11 @@ class HotMessageList extends React.Component {
                             pageSize={pageSize}
                             onChange={this.changePage}
                         />
+                    </div>
+                )}
+                {isLoading && (
+                	<div className={styles['spin-block']}>
+                        <Spin tip="数据获取中..." size="large" />
                     </div>
                 )}
 			</div>

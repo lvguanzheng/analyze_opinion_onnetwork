@@ -3,7 +3,7 @@ export const APP = {
 }
 
 export const MESSAGE = {
-    REGET_HOT_TOPIC_DATA: 'message/reget',
+    REGET_HOT_TOPIC_DATA: 'message/reGet',
     FETCH_HOT_MESSAGE_LIST: 'message/hotMsgList',
     FETCH_MSG_DETAIL_DATA: 'message/msgDetail',
     FETCH_COMMENT_USER: 'message/commentUser',

@@ -10,6 +10,9 @@ function* base(action, { type, callback = _.noop, ...params }) {
         callback(data)
     } catch (e) {
         yield put({ type: action.FAILED, message: e })
+        if(action.FAILED == 'REGET_HOT_TOPIC_DATA_FAILED') {
+            callback()
+        }
     }
 }
 

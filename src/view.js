@@ -8,14 +8,14 @@ const icons = requireAll(require.context('./images/menu-icon', false, /\.png$/))
 const roots = [
     {
         path: '/message',
-        label: '新闻管理',
+        label: '数据管理',
         subs: [
             {
                 path: '/list',
-                label: '新闻列表',
+                label: '话题列表',
                 component: 'message.HotMessageList',
                 meta: {
-                    group: '热点新闻',
+                    group: '热点话题',
                     icon: 'message_list'
                 }
             }, {
