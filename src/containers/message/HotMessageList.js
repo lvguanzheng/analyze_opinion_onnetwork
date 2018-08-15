@@ -72,6 +72,10 @@ class HotMessageList extends React.Component {
 		    dataIndex: '',
 			render: (val, record, index) => <span>{pageSize*(pageNumber-1)+index+1}</span>
 		},{
+			title: '类型',
+			dataIndex: 'typeName',
+			key: 'typeName'
+		},{
 			title: '热搜话题',
 			dataIndex: 'msgDesc',
 			key: 'msgDesc',

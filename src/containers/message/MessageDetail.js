@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Progress } from 'antd'
+import ReactHtmlParser from 'react-html-parser'
+import { Progress, Pagination } from 'antd'
 
 import { MESSAGE } from '../../constants/actions'
 import styles from './Index.styl'
@@ -16,12 +17,14 @@ import BAD_IMG from '../../images/bad.png'
 class MessageDetail extends React.Component {
 	constructor(props) {
 		super(props)
+		this.queryParams = {}
 	}
 	componentDidMount() {
 		this.fetchMsgDetailData()
 		this.fetchCommentUser()
 		this.fetchMsgCommentSensibility()
 		this.fetchViewPointStatistics()
+		this.search()
 	}
 	fetchMsgDetailData = () => {
 		const { match: { params: { id } }, dispatch } = this.props
@@ -48,9 +51,9 @@ class MessageDetail extends React.Component {
 		viewPoint.map(item => {
 			let content = ''
 			if(item.emotionType === 'good') {
-				content = item.viewContent + '\n' + '情感标签:positive'
+				content = ReactHtmlParser(item.viewContent + '\n' + '情感标签:positive')
 			} else {
-				content = item.viewContent + '\n' + '情感标签:negative'
+				content = ReactHtmlParser(item.viewContent + '\n' + '情感标签:negative')
 			}
 			viewPointArr.push(content)
 			rateArr.push(item.rate)
@@ -107,18 +110,36 @@ class MessageDetail extends React.Component {
 		}
 		barChart.setOption(option)
 	}
+	search = () => {
+        const { match: { params: { id } }, dispatch } = this.props
+        const queryParams = {}
+        queryParams.pageNumber = 1
+        queryParams.pageSize = 10
+        queryParams.id = id
+        this.queryParams = queryParams
+        dispatch({
+            type: MESSAGE.GET_COMMENT_LIST,
+            ...queryParams
+        })
+    }
+	changePage = current => {
+        const queryParams = { ...this.queryParams, pageNumber: current }
+        const { dispatch } = this.props
+        dispatch({ type: MESSAGE.GET_COMMENT_LIST, ...queryParams })
+        this.queryParams = queryParams
+    }
 	render() {
-		console.log(this.props)
-		const { msgDetailData: { content, titleType, author, authorHead, readCount, commentCount, attitudesCount, commentList = [] }, commentUserData: { commentUser = [] }, sensibilityData: { sensibility } } = this.props
+		const { msgDetailData: { content, titleType, author, authorHead, readCount, commentCount, attitudesCount }, commentTableData: { pageSize, pageNumber, pageCount, maxRecord, commentList = [] } , commentUserData: { commentUser = [] }, sensibilityData: { sensibility } } = this.props
 		const readStr = readCount + ''
 		const commentStr = commentCount + ''
+		const contentHtml = ReactHtmlParser(content)
 		return(
 			<div>
 			    <div className={styles['msg-detail-block']}>
 			        <img src={authorHead} className={styles['head-img']}/>
 			        <div className={styles['info-block']}>
 			            <div className={styles['author-info']}>{author}</div>
-			            <div>{content}</div>
+			            <div>{contentHtml}</div>
 			        </div>
 			        <span className={styles['msg-detail-info']}>阅读<span className={styles['info-text']}>({readStr.trim()})</span> | 讨论<span className={styles['info-text']}>({commentStr.trim()})</span> | 粉丝<span className={styles['info-text']}>({attitudesCount})</span></span>
 			    </div>
@@ -144,12 +165,13 @@ class MessageDetail extends React.Component {
 			        <div className={styles['msg-title-block']}>热门评论及其情感分析</div>
 			        <div className={styles['comment-list']}>
 			            {commentList.map((item, index) => {
+			            	const commentHtml = ReactHtmlParser(item.commentText)
 			            	return (
 			            		<div key={index} className={styles['comment-item']}>
 			            		    <img src={item.commentUserHead} className={styles['head-img']}/>
-							        <div className={styles['info-block']}>
+							        <div className={styles['comment-item-content']}>
 							            <div className={styles['author-info']}>{item.commentUser}</div>
-							            <div>{item.commentText}</div>
+							            <div>{commentHtml}</div>
 							        </div>
 							        <span className={styles['emotion-type']}>
 							        {item.emotionType === 'good'? <span>积极向上，干下这碗鸡汤</span> : <span>态度消极，这碗毒药我就不奉陪啦</span>}
@@ -172,6 +194,16 @@ class MessageDetail extends React.Component {
 			            	)
 			            })}
 			        </div>
+			        {maxRecord > 0 && (
+	                    <div className={styles['pagination']} style={{marginTop: 25}}>
+	                        <Pagination
+	                            current={pageNumber}
+	                            total={maxRecord}
+	                            pageSize={pageSize}
+	                            onChange={this.changePage}
+	                        />
+	                    </div>
+	                )}
 			    </div>
 			    <div className={styles['user-opinion-analyze-block']}>
 			        <div className={styles['msg-title-block']}>网民观点统计</div>

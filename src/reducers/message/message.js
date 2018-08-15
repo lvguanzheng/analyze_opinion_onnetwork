@@ -40,6 +40,15 @@ export default handleActions({
 	},
 	[MESSAGE.FETCH_VIEW_POINT.SUCCEED](state, action) {
 		return {...state, viewPointData: action.data}
+	},
+	[MESSAGE.FETCH_VIEW_POINT.FAILED](state, action) {
+		return state
+	},
+	[MESSAGE.GET_COMMENT_LIST.SUCCEED](state, action) {
+		return {...state, commentTableData: action.data}
+	},
+	[MESSAGE.GET_COMMENT_LIST.FAILED](state, action) {
+		return state
 	}
 },{
 	hotMsg: {},
@@ -48,5 +57,6 @@ export default handleActions({
 	sensibilityData: {},
 	msgType: {},
 	topicData: {},
-	viewPointData: {}
+	viewPointData: {},
+	commentTableData: {}
 })

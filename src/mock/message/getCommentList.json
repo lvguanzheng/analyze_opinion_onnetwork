@@ -1,0 +1,51 @@
+{
+	"flag": 1,
+	"message": "ok",
+	"data": {
+		"pageSize": 10,
+		"pageNumber": 1,
+		"pageCount": 5,
+		"maxRecord": 50,
+		"commentList": [{
+			"commentText": "马克思主义是社会主义的指导思想",
+			"commentUser": "圈少爷",
+			"commentUserHead": "http://tvax3.sinaimg.cn/crop.0.4.1125.1125.50/95c31c6ely8fn80r9chp0j20v90vitbl.jpg",
+			"likeCount": 85,
+			"emotionType": "good",
+			"goodProbability": 0.28,
+			"badProbability": 0.12
+		}, {
+			"commentText": "呵呵，指导思想，狗屁",
+			"commentUser": "Johnny黄景瑜",
+			"commentUserHead": "//tva2.sinaimg.cn/crop.0.0.512.512.50/7695a96djw8f3er2wyn6aj20e80e8mxg.jpg",
+			"likeCount": 24,
+			"emotionType": "bad",
+			"goodProbability": 0.18,
+			"badProbability": 0.32
+		}, {
+			"commentText": "马克思是一个伟大的思想家",
+			"commentUser": "谜璐0721",
+			"commentUserHead": "//tvax4.sinaimg.cn/crop.0.0.996.996.50/743ab92fly8fjw4e3rcjpj20ro0romxt.jpg",
+			"likeCount": 19,
+			"emotionType": "good",
+			"goodProbability": 0.18,
+			"badProbability": 0.02
+		}, {
+			"commentText": "坑害了中国",
+			"commentUser": "夏日的小甜茶YOYO",
+			"commentUserHead": "//tvax1.sinaimg.cn/crop.0.0.996.996.50/006Geu0yly8fraqp5z8sej30ro0ro75u.jpg",
+			"likeCount": 14,
+			"emotionType": "bad",
+			"goodProbability": 0.08,
+			"badProbability": 0.42
+		}, {
+			"commentText": "我来围观一波",
+			"commentUser": "我的太师",
+			"commentUserHead": "//tvax1.sinaimg.cn/crop.0.0.498.498.50/006biuXcly8fqd9ho96mkj30du0dumxu.jpg",
+			"likeCount": 5,
+			"emotionType": "good",
+			"goodProbability": 0.23,
+			"badProbability": 0.11
+		}]
+	}
+}

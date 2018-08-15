@@ -10,7 +10,8 @@ export const MESSAGE = {
     FETCH_MSG_COMMENT_SENSIBILITY: 'message/msgCommentSensibility',
     FETCH_MSG_TYPE: 'message/msgTypeStatistics',
     FETCH_HOT_TOPIC: 'message/getHotTopic',
-    FETCH_VIEW_POINT: 'message/viewPointStatistics'
+    FETCH_VIEW_POINT: 'message/viewPointStatistics',
+    GET_COMMENT_LIST: 'message/getCommentList'
 }
 
 const actions = { APP, MESSAGE }
